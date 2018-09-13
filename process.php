@@ -4,7 +4,7 @@ include 'db_connexion.php';
 
 if (isset($_GET['user_login']) and isset($_GET['user_pass']) )  {
 		 query_process_get($_GET['user_login'],$_GET['user_pass']);
-}elseif (isset($_POST['user_login']) and isset($_POST['user_pass'])) {
+}elseif (isset($_POST['user_login']) and isset($_POST['user_pass'])and isset($_POST['captcha_text'])) {
 	if ($_POST['captcha_text_input']!=$_POST['captcha_text']) {
 		$msg="erreur de code captcha ";
 		header("Location: index.php?req_post=&msg_post=".$msg."&type_msg_post=0");
@@ -36,7 +36,7 @@ if (isset($_GET['user_login']) and isset($_GET['user_pass']) )  {
 		    	 	if ($stmt->rowCount()<1)  {
 		    			$msg="utilisateur ".$user_login."n 'est pas trouvé dans la base de données.";
 		    			$type_msg=0;
-		    			
+		    			header("Location: index.php?req=".$req."&msg=".$msg."&type_msg=".$type_msg);
 		    		}else
 	                {
 		                  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -45,10 +45,10 @@ if (isset($_GET['user_login']) and isset($_GET['user_pass']) )  {
 			    			$msg="utilisateur ".$user_login."est trouvé dans la base de données.";
 			    		} 
 	    	   
-
+                     header("Location: sucess.php?req=".$req."&msg=".$msg."&type_msg=".$type_msg);
 	    	             
 	    	        }
-	    	         header("Location: index.php?req=".$req."&msg=".$msg."&type_msg=".$type_msg);
+	    	         
 	    
 	}
 	catch(PDOException $e) {
@@ -79,6 +79,7 @@ if (isset($_GET['user_login']) and isset($_GET['user_pass']) )  {
 		    	 	if ($stmt->rowCount()<1)  {
 		    			$msg="utilisateur ".$user_login."n 'est pas trouvé dans la base de données.";
 		    			$type_msg=0;
+		    			header("Location: index.php?req_post=".$req."&msg_post=".$msg."&type_msg_post=".$type_msg);
 		    			
 		    		}else
 	                {
@@ -86,12 +87,14 @@ if (isset($_GET['user_login']) and isset($_GET['user_pass']) )  {
 
 			    		   $type_msg=1;
 			    			$msg="utilisateur ".$user_login."est trouvé dans la base de données.";
+			    			header("Location: sucess.php?req_post=".$req."&msg_post=".$msg."&type_msg_post=".$type_msg);
+			    			
 			    		} 
 	    	   
-
+                            
 	    	             
 	    	        }
-	    	         header("Location: index.php?req_post=".$req."&msg_post=".$msg."&type_msg_post=".$type_msg);
+	    	         
 	    
 	}
 	catch(PDOException $e) {
