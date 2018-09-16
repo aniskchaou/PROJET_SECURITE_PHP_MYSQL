@@ -27,7 +27,7 @@ import org.omg.CORBA.NameValuePair;
 public class BruteForce {
 
     public static void main(String[] args) throws MalformedURLException, IOException, InterruptedException {
-        String url = "http://localhost/projetsecurite/index.php";
+        String url = "http://127.0.0.1:80/ProjetSecu/PROJET_SECURITE_PHP_MYSQL/index.php";
         MakeHttpQuery http_q = new MakeHttpQuery();
         http_q.setURL(url);
         File file;

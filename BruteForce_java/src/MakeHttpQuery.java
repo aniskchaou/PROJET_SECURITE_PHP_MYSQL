@@ -27,9 +27,9 @@ public class MakeHttpQuery {
         final String ANSI_GREEN = "\u001B[32m";
         //make http request
         URL req_ul = new URL(_req_url + "?user_login=" + login + "&user_pass=" + password);
+        //System.err.println(req_ul);
         HttpURLConnection connection = (HttpURLConnection) req_ul.openConnection();
         connection.setRequestMethod("GET");
-
         //make http response
         String page_title = check_title(connection);
 
